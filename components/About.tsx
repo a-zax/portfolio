@@ -140,7 +140,7 @@ export default function About() {
             <div className="mt-8 relative pt-8 border-t border-white/5">
               <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-navy-950/50">
                 <img 
-                  src="/aryan_photo.png" 
+                  src="/portfolio/aryan_photo.png" 
                   alt="Aryan Shukla"
                   className="w-full h-full object-cover grayscale-[20%] brightness-110 contrast-110 hover:grayscale-0 transition-all duration-700"
                 />

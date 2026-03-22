@@ -7,7 +7,7 @@ const TOTAL_FRAMES = 60;
 
 function buildFrameUrl(index: number): string {
   const padded = String(index + 1).padStart(4, '0');
-  return `/sequence/frame_${padded}.webp`;
+  return `/portfolio/sequence/frame_${padded}.webp`;
 }
 
 export default function ScrollyCanvas() {

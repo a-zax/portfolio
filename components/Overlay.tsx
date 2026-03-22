@@ -87,7 +87,10 @@ export default function Overlay() {
             >
               Get in Touch
             </motion.a>
-            <motion.button
+            <motion.a
+              href="/portfolio/resume.pdf"
+              target="_blank"
+              download
               onMouseEnter={playHover}
               onClick={playClick}
               className="px-8 py-4 bg-white/5 text-white font-bold rounded-full border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md"
@@ -95,7 +98,7 @@ export default function Overlay() {
               whileTap={{ scale: 0.95 }}
             >
               Download CV
-            </motion.button>
+            </motion.a>
           </div>
         </motion.div>
 

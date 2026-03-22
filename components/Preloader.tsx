@@ -2,24 +2,26 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAudio } from '@/hooks/use-audio';
 
 export default function Preloader() {
   const [stage, setStage] = useState(0);
   const [complete, setComplete] = useState(false);
+  const { playClick, playWhoosh, playPowerUp } = useAudio();
 
   useEffect(() => {
     // Disable scrolling while loading
     document.body.style.overflow = 'hidden';
 
     // Cinematic sequencing - 8 Seconds Total
-    const s1 = setTimeout(() => setStage(1), 500); // 0.5s: ARCHITECT
-    const s2 = setTimeout(() => setStage(2), 2500); // 2.5s: INNOVATE
-    const s3 = setTimeout(() => setStage(3), 4500); // 4.5s: ARYAN SHUKLA
-    const s4 = setTimeout(() => setStage(4), 7000); // 7.0s: The Breach / Blast Doors
+    const s1 = setTimeout(() => { setStage(1); playClick(); }, 500); 
+    const s2 = setTimeout(() => { setStage(2); playClick(); }, 2500); 
+    const s3 = setTimeout(() => { setStage(3); playPowerUp(); }, 4500); 
+    const s4 = setTimeout(() => { setStage(4); playWhoosh(); }, 7000); 
     const s5 = setTimeout(() => {
       setComplete(true);
-      document.body.style.overflow = ''; // Re-enable scrolling
-    }, 8500); // 8.5s: Complete
+      document.body.style.overflow = ''; 
+    }, 8500); 
 
     return () => {
       clearTimeout(s1);

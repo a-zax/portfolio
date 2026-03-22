@@ -153,9 +153,9 @@ export default function Projects() {
                     {project.title}
                   </h3>
                 </div>
-                {project.link?.github && (
+                {project.link && (
                   <a
-                    href={project.link.github}
+                    href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={playClick}

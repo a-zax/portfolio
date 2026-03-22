@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useAudio } from '@/hooks/use-audio';
 
 const skillCategories = [
   {
@@ -61,6 +62,7 @@ const skillCategories = [
 ];
 
 export default function Skills() {
+  const { playHover, playClick } = useAudio();
   return (
     <section id="skills" className="relative py-32 px-6 md:px-12">
       {/* Section divider glow */}
@@ -95,6 +97,7 @@ export default function Skills() {
           {skillCategories.map((group, gi) => (
             <motion.div
               key={group.category}
+              onMouseEnter={playHover}
               className="glass rounded-3xl p-8 relative overflow-hidden group hover:border-orange-500/30 transition-colors duration-500"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -118,6 +121,8 @@ export default function Skills() {
                 {group.skills.map((skill, si) => (
                   <motion.span
                     key={skill}
+                    onMouseEnter={playHover}
+                    onClick={playClick}
                     className="px-4 py-2 text-sm font-medium rounded-full bg-navy-900/60 border border-white/10 text-white/80 hover:text-white hover:border-orange-500/50 hover:bg-orange-500/10 hover:shadow-[0_0_15px_rgba(249,115,22,0.2)] transition-all duration-300 cursor-default"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}

@@ -1,139 +1,100 @@
 'use client';
 
-import { useRef } from 'react';
-import { useScroll, useTransform, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
+const DATA_POINTS = Array.from({ length: 20 }, (_, i) => ({
+  id: i,
+  left: `${Math.random() * 100}%`,
+  duration: 10 + Math.random() * 20,
+  delay: Math.random() * 5,
+  size: 1 + Math.random() * 3,
+  text: ['0', '1', '<', '>', '/', '_', '{', '}', 'AI', 'ML'].sort(() => Math.random() - 0.5)[0],
+}));
+
+function DataStream() {
+  return (
+    <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
+      {DATA_POINTS.map((point) => (
+        <motion.div
+          key={point.id}
+          className="absolute text-orange-500/40 font-mono select-none"
+          style={{ 
+            left: point.left, 
+            fontSize: `${point.size}rem`,
+            top: '-10%',
+          }}
+          initial={{ y: '-10%', opacity: 0 }}
+          animate={{ 
+            y: '120vh', 
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: point.duration,
+            delay: point.delay,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+          {point.text}
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 export default function Overlay() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  // --- Section 1: 0% → Hero (center) ---
-  const s1Opacity = useTransform(scrollYProgress, [0, 0.12, 0.22], [1, 1, 0]);
-  const s1Y = useTransform(scrollYProgress, [0, 0.22], ['0%', '-8%']);
-
-  // --- Section 2: 30% → Left ---
-  const s2Opacity = useTransform(
-    scrollYProgress,
-    [0.25, 0.33, 0.48, 0.55],
-    [0, 1, 1, 0]
-  );
-  const s2X = useTransform(scrollYProgress, [0.25, 0.35], ['-8%', '0%']);
-
-  // --- Section 3: 60% → Right ---
-  const s3Opacity = useTransform(
-    scrollYProgress,
-    [0.58, 0.66, 0.82, 0.9],
-    [0, 1, 1, 0]
-  );
-  const s3X = useTransform(scrollYProgress, [0.58, 0.68], ['8%', '0%']);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0" style={{ height: '500vh' }}>
-      <div className="sticky top-0 h-screen w-full pointer-events-none overflow-hidden">
+    <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+      {/* 4D Data Stream Background */}
+      {mounted && <DataStream />}
 
-        {/* ── Section 1: HERO (center) ── */}
+      {/* Main Hero Content */}
+      <div className="relative z-10 text-center px-6">
         <motion.div
-          className="absolute inset-0 flex items-center justify-center text-center px-6"
-          style={{ opacity: s1Opacity, y: s1Y }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div>
-            <motion.p
-              className="text-sm uppercase tracking-[0.3em] text-orange-400 font-mono mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.2 }}
-            >
-              AI & Software Engineer
-            </motion.p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-6 overflow-hidden pb-2">
-              <span className="text-gradient-warm inline-block overflow-hidden">
-                {'Aryan'.split('').map((char, i) => (
-                  <motion.span
-                    key={i}
-                    className="inline-block"
-                    initial={{ y: '100%', opacity: 0 }}
-                    animate={{ y: '0%', opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 1.5 + i * 0.08, ease: [0.33, 1, 0.68, 1] }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </span>
-              <br />
-              <span className="text-white/90 inline-block overflow-hidden">
-                {'Shukla.'.split('').map((char, i) => (
-                  <motion.span
-                    key={`last-${i}`}
-                    className="inline-block"
-                    initial={{ y: '100%', opacity: 0 }}
-                    animate={{ y: '0%', opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 1.8 + i * 0.08, ease: [0.33, 1, 0.68, 1] }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </span>
-            </h1>
-            <motion.p
-              className="text-lg text-white/50 max-w-md mx-auto font-light"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.6 }}
-            >
-              Architecting high-performance intelligent systems
-            </motion.p>
-          </div>
+          <p className="text-orange-500 font-mono tracking-[0.5em] uppercase text-sm mb-6">
+            AI & Software Engineer
+          </p>
+          
+          <h1 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none mb-4">
+            Aryan <span className="text-gradient-warm">Shukla.</span>
+          </h1>
+
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto my-8 opacity-50" />
+
+          <p className="max-w-xl mx-auto text-lg md:text-xl text-white/50 font-light leading-relaxed">
+            Architecting high-performance intelligent systems. 
+            Bridging R&D prototypes with scalable production.
+          </p>
         </motion.div>
 
-        {/* ── Section 2: LEFT ── */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-start px-8 md:px-20"
-          style={{ opacity: s2Opacity, x: s2X }}
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
         >
-          <div className="max-w-lg">
-            <p className="text-xs uppercase tracking-[0.3em] text-orange-400 font-mono mb-3">
-              What I Do
-            </p>
-            <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
-              I build{' '}
-              <span className="text-gradient-warm">intelligent</span>
-              <br />
-              infrastructure.
-            </h2>
-            <p className="text-white/50 text-lg leading-relaxed">
-              From real-time anomaly detection to secure distributed systems — 
-              I design robust models and fault-tolerant architectures.
-            </p>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-mono">Explore</span>
+            <motion.div 
+              className="w-px h-12 bg-gradient-to-b from-orange-500 to-transparent"
+              animate={{ height: [0, 48, 0], opacity: [0, 1, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
           </div>
         </motion.div>
-
-        {/* ── Section 3: RIGHT ── */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-end px-8 md:px-20"
-          style={{ opacity: s3Opacity, x: s3X }}
-        >
-          <div className="max-w-lg text-right">
-            <p className="text-xs uppercase tracking-[0.3em] text-orange-400 font-mono mb-3">
-              My Approach
-            </p>
-            <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
-              Bridging{' '}
-              <span className="text-gradient-cool">research</span>
-              <br />
-              and reality.
-            </h2>
-            <p className="text-white/50 text-lg leading-relaxed">
-              Where cutting-edge AI models meet industry-grade deployment. 
-              Optimizing every pipeline for precision and scale.
-            </p>
-          </div>
-        </motion.div>
-
       </div>
-    </div>
+      
+      {/* Dynamic light streak */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500/20 to-transparent blur-sm" />
+    </section>
   );
 }

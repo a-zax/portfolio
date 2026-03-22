@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import { Outfit, JetBrains_Mono } from 'next/font/google';
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import CustomCursor from '@/components/CustomCursor';
 import Preloader from '@/components/Preloader';
 import Background3D from '@/components/Background3D';
+import MouseGlow from '@/components/MouseGlow';
 
 export const metadata: Metadata = {
   title: 'Aryan Shukla — Creative Developer',
@@ -18,9 +19,14 @@ export const metadata: Metadata = {
   },
 };
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-space',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 const jetbrains = JetBrains_Mono({
@@ -44,11 +50,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${outfit.variable} ${jetbrains.variable} font-sans bg-navy-950 text-white min-h-screen custom-scrollbar`}
+        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} font-inter text-white min-h-screen custom-scrollbar`}
       >
         <Preloader />
         <CustomCursor />
         <Background3D />
+        <MouseGlow />
         {children}
       </body>
     </html>

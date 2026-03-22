@@ -4,120 +4,117 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Preloader() {
-  const [complete, setComplete] = useState(false);
   const [stage, setStage] = useState(0);
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
     // Disable scrolling while loading
     document.body.style.overflow = 'hidden';
 
-    // Cinematic sequencing
-    const t1 = setTimeout(() => setStage(1), 500); // Stage 1: "A Portfolio by"
-    const t2 = setTimeout(() => setStage(2), 2500); // Stage 2: Fade out 1, fade in "Aryan Shukla"
-    const t3 = setTimeout(() => setStage(3), 4500); // Stage 3: The massive slam
-    const t4 = setTimeout(() => {
+    // Cinematic sequencing - 8 Seconds Total
+    const s1 = setTimeout(() => setStage(1), 500); // 0.5s: ARCHITECT
+    const s2 = setTimeout(() => setStage(2), 2500); // 2.5s: INNOVATE
+    const s3 = setTimeout(() => setStage(3), 4500); // 4.5s: ARYAN SHUKLA
+    const s4 = setTimeout(() => setStage(4), 7000); // 7.0s: The Breach / Blast Doors
+    const s5 = setTimeout(() => {
       setComplete(true);
       document.body.style.overflow = ''; // Re-enable scrolling
-    }, 6000); // Remove preloader
+    }, 8500); // 8.5s: Complete
 
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
+      clearTimeout(s1);
+      clearTimeout(s2);
+      clearTimeout(s3);
+      clearTimeout(s4);
+      clearTimeout(s5);
       document.body.style.overflow = '';
     };
   }, []);
 
+  if (complete) return null;
+
   return (
-    <AnimatePresence>
-      {!complete && (
+    <div className="fixed inset-0 z-[10000] pointer-events-none flex flex-col justify-center items-center overflow-hidden">
+      
+      {/* Top Half of the Blast Door */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-1/2 bg-[#02050A] z-20 origin-top border-b border-orange-500/0"
+        initial={{ y: '0%' }}
+        animate={stage === 4 ? { y: '-100%', borderBottomColor: 'rgba(249,115,22,1)', boxShadow: '0 50px 100px rgba(249,115,22,0.8)' } : { y: '0%' }}
+        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+      />
+      
+      {/* Bottom Half of the Blast Door */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#02050A] z-20 origin-bottom border-t border-amber-400/0"
+        initial={{ y: '0%' }}
+        animate={stage === 4 ? { y: '100%', borderTopColor: 'rgba(251,191,36,1)', boxShadow: '0 -50px 100px rgba(251,191,36,0.8)' } : { y: '0%' }}
+        transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+      />
+
+      {/* Massive Typography Container */}
+      <div className="absolute inset-0 z-30 flex items-center justify-center mix-blend-plus-lighter">
+        <AnimatePresence mode="wait">
+          
+          {/* Stage 1: ARCHITECT */}
+          {stage === 1 && (
+            <motion.h1
+              key="word1"
+              className="font-black text-[15vw] tracking-tighter text-white uppercase leading-none opacity-80"
+              initial={{ opacity: 0, scale: 0.8, filter: 'blur(30px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 1.5, filter: 'blur(20px)', transition: { duration: 0.6 } }}
+              transition={{ duration: 1.5, ease: 'easeOut' }}
+            >
+              ARCHITECT
+            </motion.h1>
+          )}
+
+          {/* Stage 2: INNOVATE */}
+          {stage === 2 && (
+            <motion.h1
+              key="word2"
+              className="font-black text-[15vw] tracking-tighter text-white uppercase leading-none opacity-80"
+              initial={{ opacity: 0, scale: 0.5, filter: 'blur(30px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 1.5, filter: 'blur(20px)', transition: { duration: 0.6 } }}
+              transition={{ duration: 1.5, ease: 'easeOut' }}
+            >
+              INNOVATE
+            </motion.h1>
+          )}
+
+          {/* Stage 3: THE NAME */}
+          {stage === 3 && (
+            <motion.h1
+              key="name"
+              className="font-black text-[18vw] md:text-[15vw] text-gradient-warm uppercase leading-none text-center"
+              initial={{ opacity: 0, scale: 0.3, letterSpacing: '-0.3em', filter: 'blur(30px)' }}
+              animate={{ opacity: 1, scale: 1, letterSpacing: '-0.05em', filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 2.5, filter: 'blur(30px)', transition: { duration: 0.8, ease: 'easeInOut' } }}
+              transition={{ duration: 1.8, type: 'spring', bounce: 0.4 }}
+            >
+              ARYAN
+              <br />
+              SHUKLA
+            </motion.h1>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Extreme Flash upon reveal */}
+      {stage === 4 && (
         <motion.div
-          className="fixed inset-0 z-[10000] bg-[#02050A] flex flex-col items-center justify-center pointer-events-none overflow-hidden"
+          className="absolute inset-0 bg-white z-[40]"
           initial={{ opacity: 1 }}
-          exit={{ 
-            opacity: 0, 
-            transition: { duration: 1.5, ease: 'easeInOut' } 
-          }}
-        >
-          {/* Ambient Film Grain / Texture (pseudo) */}
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none" />
-
-          {/* Stage 1 & 2: The Production Intro */}
-          <AnimatePresence mode="wait">
-            {stage === 1 && (
-              <motion.div
-                key="stage1"
-                className="text-white/50 tracking-[0.5em] text-xs md:text-sm font-mono uppercase text-center"
-                initial={{ opacity: 0, filter: 'blur(10px)' }}
-                animate={{ opacity: 1, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, filter: 'blur(10px)', transition: { duration: 1 } }}
-                transition={{ duration: 1.5, ease: 'easeOut' }}
-              >
-                An interactive experience by
-              </motion.div>
-            )}
-            
-            {stage === 2 && (
-              <motion.div
-                key="stage2"
-                className="text-white font-bold tracking-widest text-2xl md:text-3xl text-gradient-warm text-center"
-                initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)', transition: { duration: 0.8 } }}
-                transition={{ duration: 1.2, ease: 'easeOut' }}
-              >
-                ARYAN SHUKLA
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Stage 3: The Cinematic Zoom-Through */}
-          {stage >= 3 && (
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center mix-blend-plus-lighter"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ 
-                scale: [0.5, 1, 50],
-                opacity: [0, 1, 0]
-              }}
-              transition={{ 
-                duration: 2, 
-                times: [0, 0.4, 1], 
-                ease: [0.8, 0, 0.2, 1] 
-              }}
-            >
-              <div 
-                className="w-full h-1 bg-orange-500 shadow-[0_0_100px_30px_rgba(249,115,22,0.8)]"
-                style={{ transform: 'rotate(-45deg)', transformOrigin: 'center' }}
-              />
-            </motion.div>
-          )}
-
-          {stage >= 3 && (
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center mix-blend-plus-lighter"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ 
-                scale: [0.5, 1, 50],
-                opacity: [0, 1, 0]
-              }}
-              transition={{ 
-                duration: 2, 
-                times: [0, 0.4, 1], 
-                ease: [0.8, 0, 0.2, 1],
-                delay: 0.1
-              }}
-            >
-              <div 
-                className="w-full h-1 bg-amber-400 shadow-[0_0_100px_30px_rgba(251,191,36,0.8)]"
-                style={{ transform: 'rotate(45deg)', transformOrigin: 'center' }}
-              />
-            </motion.div>
-          )}
-
-        </motion.div>
+          animate={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+        />
       )}
-    </AnimatePresence>
+
+      {/* Film Grain constantly active behind doors */}
+      <div className="absolute inset-0 z-40 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none" />
+
+    </div>
   );
 }

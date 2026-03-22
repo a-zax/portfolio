@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useAudio } from '@/hooks/use-audio';
 
 interface Project {
   title: string;
@@ -90,6 +91,7 @@ const cardVariants = {
 };
 
 export default function Projects() {
+  const { playHover, playClick } = useAudio();
   return (
     <section className="relative py-32 px-6 md:px-12 bg-navy-950">
       {/* Section header */}
@@ -116,15 +118,25 @@ export default function Projects() {
       </div>
 
       {/* List Layout instead of Grid */}
-      <div className="max-w-5xl mx-auto space-y-16">
-        {projects.map((project, i) => (
+      <motion.div
+        className="max-w-5xl mx-auto space-y-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{
+          visible: { transition: { staggerChildren: 0.2 } },
+          hidden: {}
+        }}
+      >
+        {projects.map((project, index) => (
           <motion.div
-            key={project.title}
+            key={index}
+            onMouseEnter={playHover}
             className="group relative rounded-3xl p-8 md:p-12 glass overflow-hidden"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, delay: i * 0.1 }}
+            transition={{ duration: 0.7, delay: index * 0.1 }}
           >
             {/* Ambient Background Glow */}
             <div
@@ -141,12 +153,15 @@ export default function Projects() {
                     {project.title}
                   </h3>
                 </div>
-                {project.link && (
+                {project.link?.github && (
                   <a
-                    href={project.link}
+                    href={project.link.github}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={playClick}
+                    onMouseEnter={playHover}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-orange-500/30 text-white/80 transition-all duration-300 backdrop-blur-md"
+                    title="View Code"
                   >
                     <span className="font-mono text-sm">View Source</span>
                     <span>↗</span>
@@ -178,7 +193,7 @@ export default function Projects() {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

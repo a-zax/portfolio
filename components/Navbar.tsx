@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Magnetic from './Magnetic';
+import { useAudio } from '@/hooks/use-audio';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -16,6 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { playHover, playClick } = useAudio();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -25,13 +27,14 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 transition-all duration-500"
+      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-3 transition-all duration-500"
       style={{
         background: scrolled
-          ? 'rgba(2, 8, 24, 0.85)'
+          ? 'rgba(2, 5, 10, 0.4)'
           : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(249, 115, 22, 0.2)' : 'none',
+        boxShadow: scrolled ? '0 10px 30px -10px rgba(0,0,0,0.5)' : 'none',
       }}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -59,7 +62,9 @@ export default function Navbar() {
             >
               <a
                 href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors duration-200 font-medium"
+                onMouseEnter={playHover}
+                onClick={playClick}
+                className="text-[10px] uppercase tracking-[0.3em] text-white/50 hover:text-orange-400 transition-all duration-300 font-mono"
               >
                 {link.label}
               </a>
@@ -71,6 +76,8 @@ export default function Navbar() {
         <Magnetic>
           <motion.a
             href="mailto:aryanshukla212004@gmail.com"
+            onMouseEnter={playHover}
+            onClick={playClick}
             className="hidden md:block text-sm px-5 py-2 rounded-full border border-orange-500/40 text-orange-400 hover:bg-orange-500/10 transition-all duration-300 font-medium cursor-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

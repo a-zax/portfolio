@@ -1,5 +1,4 @@
 import Navbar from '@/components/Navbar';
-import ScrollyCanvas from '@/components/ScrollyCanvas';
 import Overlay from '@/components/Overlay';
 import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
@@ -15,14 +14,9 @@ export default function Home() {
       {/* Sticky navigation */}
       <Navbar />
 
-      {/* ─── SCROLLYTELLING ZONE ─── */}
-      {/* Position relative so Overlay can be positioned inside it */}
-      <div className="relative" id="hero">
-        <ScrollyCanvas />
-        {/* Overlay is absolutely positioned inside this wrapper */}
-        <div className="absolute inset-0 top-0 pointer-events-none z-10" style={{ height: '500vh' }}>
-          <Overlay />
-        </div>
+      {/* ─── SCROLL SEQUENCE HERO (3D Background Only) ─── */}
+      <div className="relative w-full" style={{ height: '500vh' }} id="hero">
+        <Overlay />
       </div>
 
       {/* ─── CONTENT SECTIONS ─── */}

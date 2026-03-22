@@ -44,7 +44,7 @@ export default function Navbar() {
         {/* Logo */}
         <motion.a
           href="/"
-          className="text-white font-bold text-xl tracking-tight"
+          className="text-white font-black text-2xl tracking-tighter"
           whileHover={{ scale: 1.05 }}
         >
           <span className="text-gradient-warm">A</span>ryan
@@ -64,7 +64,7 @@ export default function Navbar() {
                 href={link.href}
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="text-[10px] uppercase tracking-[0.3em] text-white/50 hover:text-orange-400 transition-all duration-300 font-mono"
+                className="text-sm tracking-tight text-white/50 hover:text-white transition-all duration-300 font-medium"
               >
                 {link.label}
               </a>

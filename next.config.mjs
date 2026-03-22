@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // basePath: '/portfolio', // Uncomment this line ONLY when deploying to GitHub Pages!
+  basePath: '/portfolio', // Enabled for GitHub Pages deployment.
   images: {
     unoptimized: true,
   },

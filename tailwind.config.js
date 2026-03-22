@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-outfit)', 'sans-serif'],
+        display: ['var(--font-outfit)', 'sans-serif'],
+        space: ['var(--font-outfit)', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {

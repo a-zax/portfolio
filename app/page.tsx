@@ -14,8 +14,8 @@ export default function Home() {
       {/* Sticky navigation */}
       <Navbar />
 
-      {/* ─── SCROLL SEQUENCE HERO (3D Background Only) ─── */}
-      <div className="relative w-full" style={{ height: '500vh' }} id="hero">
+      {/* ─── HERO SECTION ─── */}
+      <div className="relative w-full h-screen" id="hero">
         <Overlay />
       </div>
 

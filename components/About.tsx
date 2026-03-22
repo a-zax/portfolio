@@ -135,6 +135,20 @@ export default function About() {
                 </div>
               </div>
             </div>
+
+            {/* Futuristic Avatar Integration */}
+            <div className="mt-8 relative pt-8 border-t border-white/5">
+              <div className="aspect-square rounded-2xl overflow-hidden border border-white/10 bg-navy-950/50">
+                <img 
+                  src="/aryan_photo.png" 
+                  alt="Aryan Shukla"
+                  className="w-full h-full object-cover grayscale-[20%] brightness-110 contrast-110 hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+              <div className="absolute top-12 left-4 px-3 py-1 bg-orange-500 text-[10px] font-bold text-white rounded-full uppercase tracking-widest animate-pulse">
+                System Active
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

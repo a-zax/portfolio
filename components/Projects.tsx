@@ -9,7 +9,7 @@ interface Project {
   tags: string[];
   year: string;
   gradient: string;
-  link?: string;
+  link?: string | { github: string };
 }
 
 const projects: Project[] = [
@@ -70,9 +70,10 @@ const projects: Project[] = [
       'Developed a robust XGBoost machine learning pipeline for accurate lap time forecasts and anomaly detection.',
       'Modeled advanced pit-stop strategies utilizing Monte Carlo simulations to calculate probabilistic race outcomes under varying conditions.',
     ],
-    tags: ['XGBoost', 'Python', 'Scikit-Learn', 'Pandas'],
+    tags: ['XGBoost', 'Python', 'Scikit-Learn', 'Pandas', 'Monte Carlo'],
     year: '2024',
     gradient: 'from-violet-500/20 to-indigo-400/10',
+    link: 'https://github.com/a-zax/F1-Predictor.git'
   },
 ];
 
@@ -155,7 +156,7 @@ export default function Projects() {
                 </div>
                 {project.link && (
                   <a
-                    href={project.link}
+                    href={typeof project.link === 'string' ? project.link : project.link.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={playClick}

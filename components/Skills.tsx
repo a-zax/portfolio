@@ -7,7 +7,7 @@ const skillCategories = [
   {
     category: 'Languages',
     icon: '💻',
-    skills: ['Python', 'SQL'],
+    skills: ['Python', 'C', 'C++', 'JavaScript', 'TypeScript', 'SQL', 'HTML/CSS'],
   },
   {
     category: 'AI & ML',
@@ -35,9 +35,9 @@ const skillCategories = [
     skills: ['Distributed Systems', 'Microservices Architecture', 'Concurrency Control (Locks, Semaphores, Mutex)', 'Queue Management', 'Message Queuing Systems', 'NAS', 'Multi-threading', 'Resource Management', 'ACID Compliance'],
   },
   {
-    category: 'MLOps',
+    category: 'MLOps & DevOps',
     icon: '🚀',
-    skills: ['Model Evaluation & Optimization', 'GPU Acceleration (CUDA)', 'NVIDIA NVENC Pipelines', 'GStreamer', 'Real-time Inference', 'CI/CD Pipelines'],
+    skills: ['Model Evaluation & Optimization', 'GPU Acceleration (CUDA)', 'NVIDIA NVENC Pipelines', 'GStreamer', 'Real-time Inference', 'Docker', 'Kubernetes', 'AWS (S3, EC2)', 'Git/GitHub', 'CI/CD Pipelines'],
   },
   {
     category: 'Development Tools',
@@ -111,7 +111,7 @@ export default function Skills() {
                 <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl shadow-inner">
                   {group.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-wide">
+                <h3 className="text-xl font-bold text-white tracking-widest uppercase">
                   {group.category}
                 </h3>
               </div>

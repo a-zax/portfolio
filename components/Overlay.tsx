@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useAudio } from '@/hooks/use-audio';
 
 const DATA_POINTS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
@@ -45,6 +46,7 @@ function DataStream() {
 
 export default function Overlay() {
   const [mounted, setMounted] = useState(false);
+  const { playHover, playClick } = useAudio();
   useEffect(() => setMounted(true), []);
 
   return (
@@ -69,10 +71,32 @@ export default function Overlay() {
 
           <div className="h-px w-24 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto my-8 opacity-50" />
 
-          <p className="max-w-xl mx-auto text-lg md:text-xl text-white/50 font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-lg md:text-xl text-white/50 font-light leading-relaxed mb-10">
             Architecting high-performance intelligent systems. 
             Bridging R&D prototypes with scalable production.
           </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.a
+              href="#contact"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="px-8 py-4 bg-orange-500 text-white font-bold rounded-full hover:bg-orange-600 transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)]"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get in Touch
+            </motion.a>
+            <motion.button
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="px-8 py-4 bg-white/5 text-white font-bold rounded-full border border-white/10 hover:bg-white/10 transition-all backdrop-blur-md"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Download CV
+            </motion.button>
+          </div>
         </motion.div>
 
         {/* Scroll Indicator */}

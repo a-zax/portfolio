@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const achievements = [
   {
-    title: 'Brain Dead 2026 Hackathon Winner',
-    subtitle: 'Data Analysis & ML Challenge, Revelation 2026, IIEST Shibpur',
+    title: 'Winner - Revelation 2026',
+    subtitle: 'Data Analysis & ML Challenge | IIEST Shibpur',
     link: 'https://www.linkedin.com/in/aryan-shukla-9b262622b/details/certifications/'
   },
   {

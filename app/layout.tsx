@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { Outfit, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import CustomCursor from '@/components/CustomCursor';
 import Preloader from '@/components/Preloader';
@@ -19,14 +19,9 @@ export const metadata: Metadata = {
   },
 };
 
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-space',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-outfit',
 });
 
 const jetbrains = JetBrains_Mono({
@@ -50,7 +45,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} font-inter text-white min-h-screen custom-scrollbar`}
+        className={`${outfit.variable} ${jetbrains.variable} font-sans text-white min-h-screen custom-scrollbar`}
       >
         <Preloader />
         <CustomCursor />

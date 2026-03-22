@@ -10,8 +10,8 @@
   --navy-800: #0a1630;
   --orange-500: #f97316;
   --amber-400: #fbbf24;
-  --font-space: 'Space Grotesk', sans-serif;
-  --font-inter: 'Inter', sans-serif;
+  --font-display: var(--font-outfit), sans-serif;
+  --font-sans: var(--font-outfit), sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -28,15 +28,22 @@ html {
 body {
   background: transparent;
   color: #f8fafc;
-  font-family: var(--font-inter);
+  font-family: var(--font-sans);
+  letter-spacing: -0.015em;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-space);
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+h1, h2 {
+  font-weight: 800;
+  text-transform: none;
 }
 
 /* Custom scrollbar */

@@ -62,7 +62,7 @@ export default function Preloader() {
           {stage === 1 && (
             <motion.h1
               key="word1"
-              className="font-black text-[15vw] tracking-tighter text-white uppercase leading-none opacity-80"
+              className="font-display font-black text-[12vw] tracking-tighter text-white uppercase leading-none opacity-80"
               initial={{ opacity: 0, scale: 0.8, filter: 'blur(30px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, scale: 1.5, filter: 'blur(20px)', transition: { duration: 0.6 } }}
@@ -76,7 +76,7 @@ export default function Preloader() {
           {stage === 2 && (
             <motion.h1
               key="word2"
-              className="font-black text-[15vw] tracking-tighter text-white uppercase leading-none opacity-80"
+              className="font-display font-black text-[12vw] tracking-tighter text-white uppercase leading-none opacity-80"
               initial={{ opacity: 0, scale: 0.5, filter: 'blur(30px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, scale: 1.5, filter: 'blur(20px)', transition: { duration: 0.6 } }}
@@ -90,7 +90,7 @@ export default function Preloader() {
           {stage === 3 && (
             <motion.h1
               key="name"
-              className="font-black text-[18vw] md:text-[15vw] text-gradient-warm uppercase leading-none text-center"
+              className="font-display font-black text-[14vw] md:text-[12vw] text-gradient-warm uppercase leading-none text-center"
               initial={{ opacity: 0, scale: 0.3, letterSpacing: '-0.3em', filter: 'blur(30px)' }}
               animate={{ opacity: 1, scale: 1, letterSpacing: '-0.05em', filter: 'blur(0px)' }}
               exit={{ opacity: 0, scale: 2.5, filter: 'blur(30px)', transition: { duration: 0.8, ease: 'easeInOut' } }}
